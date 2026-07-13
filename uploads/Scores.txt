@@ -1,0 +1,21 @@
+Formula:
+For Query Based Confidence Score: 
+retrieval_score=(Top 3 retrievals)*weights(0.5,0.3,0.2)
+normalized=(retrieval_score - MIN_SCORE) / (MAX_SCORE - MIN_SCORE)
+where,
+MIN_SCORE=0.35
+MAX_SCORE=0.75
+
+Here, MIN and MAX SCORE were chosen based on observed scores for various chunks and queries.
+
+1)What is this document about?
+
+A:This document is about a take-home evaluation project that tests a candidate's ability to think, research, structure, and ship a project, specifically a "Smart Document Q&A and Summarizer Tool". The project involves building a backend application that accepts a document, splits it into chunks, answers user questions about the document using a Large Language Model (LLM), and provides a summary of the document. The document outlines the objectives, tasks, and phases of the project, including setup, implementation, testing, and documentation.
+Confidence Score(Based on Retrieval)(in %)=75.87541043758395 
+
+
+2) What rules must the interns follow?
+A:The interns must follow these ground rules: ● Work independently ● They can use AI tools to help with coding and research ● Ask clarifying questions anytime ● If they get stuck, document what they tried and why it didn't work.
+
+Confidence Score(Based on Retrieval)(in %)=66.33271425962447
+
