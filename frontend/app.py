@@ -53,7 +53,9 @@ if st.session_state.uploaded_hash is None:
 st.info(
     """
     "Ask Query" is optimized to answer specific topic within the document.
+    
     "Generate Summary" is optimized to give full Document Summary
+    
     "Page Retrieval" helps give more precise answer for specified Pages.
     """
 )
@@ -98,29 +100,6 @@ if st.button("Ask Query", use_container_width=True):
             st.write(answer)
         else:
             st.error("Query failed.")
-
-# st.subheader("Page Retrieval")
-# start_page = st.number_input(
-#     "Start Page",
-#     min_value=1,
-#     max_value=st.session_state.total_pages,
-#     value=1
-# )
-#
-# use_end = st.checkbox(
-#     "Specify End Page"
-# )
-#
-# if use_end:
-#     end_page = st.number_input(
-#         "End Page",
-#         min_value=start_page,
-#         max_value=st.session_state.total_pages,
-#         value=start_page
-#     )
-# else:
-#     end_page = start_page
-#
 
 page_numbers = list(range(1, st.session_state.total_pages + 1))
 st.subheader("Page Retrieval")

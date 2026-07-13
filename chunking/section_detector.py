@@ -1,17 +1,10 @@
 from chunking.parser_utils import get_body_font_size, heading_score, clean_text
-import re
-
 
 def detect_pdf_sections(pages):
     body_font_size, body_font_name=get_body_font_size(pages)
-    #section_patterns = [r'^[A-Z][A-Z ]+$',
-    #                    r'^#+\s+.+',
-    #                    r'^.+\n[-=]{3,}$'
-    #                    ]
-
     sections=[]
     section_id=0
-    current_heading="Introduction"
+    current_heading="Default"
     current_content=[]
     section_page=1
     heading_buffer=[]
@@ -21,7 +14,7 @@ def detect_pdf_sections(pages):
     for page in pages:
         current_page=page["page"]
 
-        if(previous_page is not None
+        if (previous_page is not None
             and previous_page!=current_page
             and current_content):
 
@@ -49,7 +42,6 @@ def detect_pdf_sections(pages):
 
                 line_text=clean_text(line_text)
 
-
                 if not line_text:
                     continue
 
@@ -63,10 +55,10 @@ def detect_pdf_sections(pages):
                                       body_font_size,
                                       body_font_name)
 
+                """Uncomment to know what Score each line got"""
                 # print("=" * 60)
                 # print("Detected heading:", line_text)
                 # print("Score:", score)
-
 
                 is_heading = score >= 4
 

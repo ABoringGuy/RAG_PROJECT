@@ -26,7 +26,6 @@ def generate_response(rag_data, mode, query="", start_page=None, end_page=None):
     section_index = rag_data["section_index"]
     chunk_positions = rag_data["chunk_positions"]
     page_index = rag_data["page_index"]
-    #total_pages = rag_data["total_pages"] Delete later if not used
 
     if mode == "query":
         query_embedding = embed_query(query)
@@ -40,7 +39,7 @@ def generate_response(rag_data, mode, query="", start_page=None, end_page=None):
         )
 
     elif mode == "page":
-        include_pages = False
+        include_pages = True
         retrieved_docs = retrieve_page_chunks(
             start_page,
             end_page,
@@ -68,7 +67,6 @@ def generate_response(rag_data, mode, query="", start_page=None, end_page=None):
     context = build_context(retrieved_docs, include_pages)
 
     prompt = build_prompt(mode, context, query, start_page, end_page)
-    #print(prompt[:1000])
     answer=generate(prompt)
     for i, doc in enumerate(retrieved_docs):
         print("=" * 80)
@@ -76,6 +74,5 @@ def generate_response(rag_data, mode, query="", start_page=None, end_page=None):
         print(doc.metadata["page"])
         print(doc.metadata["section_id"])
         print(doc.page_content)
-    # print("Length of Context is: ", len(context))
 
     return answer

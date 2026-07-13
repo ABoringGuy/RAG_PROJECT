@@ -7,13 +7,13 @@ ENV PYTHONDONTWRITEBYTECODE=1
 WORKDIR /app
 
 # Copy requirements
-COPY requirements.txt .
+COPY requirements_frontend.txt .
 
 # Upgrade pip
 RUN pip install --upgrade pip
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements_frontend.txt
 
 # Copy the whole project
 COPY . .

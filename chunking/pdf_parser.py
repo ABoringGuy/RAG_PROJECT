@@ -11,11 +11,10 @@ load_dotenv()
 
 tesseract_cmd = os.getenv("TESSERACT_CMD")
 
-if tesseract_cmd:
+if tesseract_cmd and os.path.exists(tesseract_cmd):
     pytesseract.pytesseract.tesseract_cmd = tesseract_cmd
 elif shutil.which("tesseract"):
-    # Docker/Linux: use the executable available on PATH
-    pass
+    pytesseract.pytesseract.tesseract_cmd = shutil.which("tesseract")
 else:
     raise RuntimeError("Tesseract executable not found.")
 
@@ -29,7 +28,8 @@ def extract_image_text(page, bbox):
 
     try:
         text = pytesseract.image_to_string(image)
-    except Exception:
+    except Exception as e:
+        print("OCR Error:", e)
         return None
 
     text = text.strip()

@@ -122,7 +122,17 @@ def get_body_font_size(pages):
                     return font_size_counter.most_common(1)[0][0], font_name_counter.most_common(1)[0][0]
 
     # Fallback for short documents
-    return font_size_counter.most_common(1)[0][0], font_name_counter.most_common(1)[0][0]
+    try:
+        return font_size_counter.most_common(1)[0][0], font_name_counter.most_common(1)[0][0]
+    except IndexError:
+        print("Empty File Detected")
+    # if not font_size_counter:
+    #     return 1, "OCR"
+    #
+    # return (
+    #     font_size_counter.most_common(1)[0][0],
+    #     font_name_counter.most_common(1)[0][0]
+    # )
 
 def clean_text(text):
     # remove excessive spaces

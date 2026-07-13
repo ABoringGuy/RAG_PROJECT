@@ -29,11 +29,6 @@ Requirements:
 - Do NOT explain your reasoning.
 - Do NOT repeat information.
 - Do not reproduce or explain mathematical equations unless they are essential to understanding the document's main contribution.
-- After generating summary, Based only on the provided context,Rate:
-    - completeness
-    - factual support
-    - confidence
-
 Context:
 {context}
         """
@@ -59,12 +54,3 @@ Context:
         Answer:
         """
     return prompt
-
-
-# - Organize the summary using clear section headings where appropriate.
-# - Focus on the document's:
-#   - Objective
-#   - Methodology
-#   - Key results
-#   - Conclusion
-#   - Limitations or future work (if present)
