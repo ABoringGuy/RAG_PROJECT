@@ -10,7 +10,6 @@ env/
 
 # IDEs
 .idea/
-.vscode/
 
 # Git
 .git/
@@ -36,3 +35,6 @@ huggingface/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Demo Video
+Demo_Video.mp4

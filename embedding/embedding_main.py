@@ -67,7 +67,7 @@ def generate_response(rag_data, mode, query="", start_page=None, end_page=None):
     context = build_context(retrieved_docs, include_pages)
 
     prompt = build_prompt(mode, context, query, start_page, end_page)
-    answer=generate(prompt)
+    answer =generate(prompt)
     for i, doc in enumerate(retrieved_docs):
         print("=" * 80)
         print(doc.metadata["heading"])

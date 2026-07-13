@@ -14,6 +14,11 @@ page_index = defaultdict(list)
 page_positions = {}
 
 def build_metadata_indexes(documents):
+    section_index.clear()
+    chunk_positions.clear()
+
+    page_index.clear()
+    page_positions.clear()
     for idx, doc in enumerate(documents):
         section_id= doc.metadata["section_id"]
         section_index[section_id].append(idx)

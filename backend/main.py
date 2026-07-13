@@ -1,8 +1,9 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from backend.RAG_Pipeline import RAGPipeline
 from backend.models import QueryRequest, QueryResponse, SummaryResponse,PageRequest
 import shutil
 import os
+from groq import RateLimitError
 
 app = FastAPI()
 pipeline = RAGPipeline()
@@ -23,16 +24,36 @@ def upload_document(file: UploadFile = File(...)):
 
 @app.post("/query", response_model=QueryResponse)
 def query_document(request: QueryRequest):
-    answer = pipeline.query(request.query)
-    return {"answer": answer}
+    try:
+        answer = pipeline.query(request.query)
+        return {"answer": answer}
+
+    except RateLimitError:
+        raise HTTPException(
+            status_code=429,
+            detail="Token exceeded. Please try again later."
+        )
 
 @app.post("/summary", response_model=SummaryResponse)
 def generate_summary():
-    answer=pipeline.summarize()
-    return {"answer": answer}
+    try:
+        answer=pipeline.summarize()
+        return {"answer": answer}
+
+    except RateLimitError:
+        raise HTTPException(
+            status_code=429,
+            detail="Token exceeded. Please try again later."
+        )
 
 @app.post("/page")
 def retrieve_page(request: PageRequest):
-    answer = pipeline.page_query(request.start_page, request.end_page, request.query)
-    return {"answer": answer}
+    try:
+        answer = pipeline.page_query(request.start_page, request.end_page, request.query)
+        return {"answer": answer}
+    except RateLimitError:
+        raise HTTPException(
+            status_code=429,
+            detail="Token exceeded. Please try again later."
+        )
 

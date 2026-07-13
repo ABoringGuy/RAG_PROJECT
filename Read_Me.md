@@ -87,3 +87,9 @@ Scores.md contains response from latest build(mostly queries)
 - Front-end URL: http://localhost:8501 and Back-end URL: http://localhost:8000/docs
 - Run Front-end URL(warning: Front-end loads faster than Back End. Sometimes uploading immediately after running results in error. Simply re-upload the file if this happens.)
 - Once done, run "docker compose down"
+
+# 7) Why I chose Dense Embedding Retrieval for Query?
+Dense Retrieval for Query allowed, retrieval based on Semantic meaning of Query rather than simple term(TF-IDF) search. This helped understand user intent better.
+
+# 8) Why Dense Embedding was not used in Summary and Page Retrieval?
+Terms like "Summary" and "Explain Page Number x" don't have much semantic meaning behind them. For summary, appropriate chunks based on length needed to be extracted whereas for Page Retrieval, finding specific Page Number was not suitable for dense embedding

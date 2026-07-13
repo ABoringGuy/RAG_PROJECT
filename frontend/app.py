@@ -18,7 +18,13 @@ if "uploaded_hash" not in st.session_state:
 
 if "total_pages" not in st.session_state:
     st.session_state.total_pages = 1
-
+st.info(
+    """
+    Only .pdf, .docx and .txt is supported
+    
+    You cannot input empty files or files with only Images(Images that don't have text on them)
+    """
+)
 uploaded_file = st.file_uploader("Upload a document",
                                  type=["pdf","docx","txt"])
 
@@ -73,6 +79,9 @@ if st.button("Generate Summary", use_container_width=True):
         st.success("Summary Generated")
         st.write(summary)
 
+    elif response.status_code == 429:
+        st.error("Token exceeded. Please try again later.")
+
     else:
         st.error("Failed to generate summary.")
 
@@ -98,6 +107,10 @@ if st.button("Ask Query", use_container_width=True):
             answer = response.json()["answer"]
             st.success("Answer Generated")
             st.write(answer)
+
+        elif response.status_code == 429:
+            st.error("Token exceeded. Please try again later.")
+
         else:
             st.error("Query failed.")
 
@@ -143,6 +156,9 @@ if st.button("Retrieve Pages", use_container_width=True):
             answer = response.json()["answer"]
             st.success("Answer Generated")
             st.write(answer)
+
+        elif response.status_code == 429:
+            st.error("Token exceeded. Please try again later.")
 
         else:
             st.error("Query failed.")
