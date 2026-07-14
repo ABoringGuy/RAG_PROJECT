@@ -1,4 +1,4 @@
-# 1) What this Project Does?
+# 1) Project Description
 Answer: This Project allows user to upload documents and either:
 i) Generate Summary
 ii) Provide Query Based on Contents of Document
@@ -11,7 +11,7 @@ Retrieval for Summary was done based on a scoring system that aims to retrieve r
 Retrieval for Page Number specific Query was done by using Page Number metadata for retrieval of relevant chunks. 
 
 
-# 2) Architecture:
+# 2) Flow of Program:
 
 Step 1: User Uploads file through Front End
 
@@ -80,16 +80,27 @@ Scores.md contains response from latest build(mostly queries)
 - Helped compute best Mathematical equations and conditions in various cases(example: How much chunks to read to determine body font size)
 - Helped familiarize coding with various libraries not used before.
 
-# 6) How to run:
+# 6) How to run(with Docker):
 - Go to Project root file in terminal.
+- Go to .env.example, rename it to ".env" and input your Groq API Key
 - Run "docker compose build"
 - To run "docker compose up"
 - Front-end URL: http://localhost:8501 and Back-end URL: http://localhost:8000/docs
 - Run Front-end URL(warning: Front-end loads faster than Back End. Sometimes uploading immediately after running results in error. Simply re-upload the file if this happens.)
 - Once done, run "docker compose down"
 
-# 7) Why I chose Dense Embedding Retrieval for Query?
-Dense Retrieval for Query allowed, retrieval based on Semantic meaning of Query rather than simple term(TF-IDF) search. This helped understand user intent better.
-
-# 8) Why Dense Embedding was not used in Summary and Page Retrieval?
-Terms like "Summary" and "Explain Page Number x" don't have much semantic meaning behind them. For summary, appropriate chunks based on length needed to be extracted whereas for Page Retrieval, finding specific Page Number was not suitable for dense embedding
+# 7) How to run(without Docker):
+- Make sure you have following installed:
+    - Python 3.14
+    - Tesseract Ocr
+- Install all the requirments with command:
+    - pip install -r requirements.txt
+    - pip install -r requirements_frontend.txt
+- Go to .env.example, rename it to ".env" and input your Groq API Key
+- Open Terminal and go to Project Root
+- Run command:
+    - uvicorn backend.main:app --reload 
+- Wait till you get the URL: http://localhost:8000 in terminal
+- Once you see above URL, open another terminal and run command:
+    -run File Path\RAG_Project\frontend\app.py
+- Open: http://localhost:8501 to run the project
