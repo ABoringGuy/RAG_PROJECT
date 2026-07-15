@@ -14,7 +14,7 @@ def calculate_retrieval_confidence(scores):
         return 0
 
     top_scores = valid_scores[:3]
-    weights = np.array([0.5, 0.3, 0.2])#Gives most value to highest Score, lower to 2nd Highest and Lowest to 3rd Highest
+    weights = np.array([0.5, 0.3, 0.2])[:len(top_scores)]#Gives most value to highest Score, lower to 2nd Highest and Lowest to 3rd Highest
 
     retrieval_score = np.sum(
         np.array(top_scores) * weights
