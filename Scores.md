@@ -212,7 +212,7 @@ Note: This is actually the correct answer
 
 ---
 
-#### 9\) For same use case diagram, Q: Explain how user interacts with TrashNet.
+## 9\) For same use case diagram, Q: Explain how user interacts with TrashNet.
 
 ### Chunks Sent:
 
